@@ -42,4 +42,20 @@ public class OrderModel {
             }
         }
     }
+
+    public Order to() {
+        List<Item> domainItems = items == null
+                ? new ArrayList<>()
+                : items.stream()
+                       .map(ItemModel::to)
+                       .collect(Collectors.toList());
+
+        return Order.builder()
+                .id(idOrder)
+                .idUser(idUser)
+                .date(date)
+                .total(total)
+                .items(domainItems)
+                .build();
+    }
 }
